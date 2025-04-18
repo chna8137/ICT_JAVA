@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex15_js</title>
+</head>
+
+<body>
+    <h1>Query Select</h1>
+    <h2>이것은 우리가 해야하나요?</h2>
+    <select id="session" name="session">
+        <option value="1" selected>마케팅</option>
+        <option value="2">개발</option>
+        <option value="3">디자인</option>
+    </select>
+    <div id="target"></div>
+    <script>
+        // onclick = 클릭, onchange = 변경
+        // select 는 onchange이다.
+        document.getElementById('session').onchange = function () {
+            let session = document.getElementById('session').value;
+            let res = "";
+
+            // alert(session);
+            switch (session) {
+                case "1": res = "<p>마케팅 세션은 <strong>201호</strong>에서 진행됩니다.</p>";
+                    break;
+                case "2": res = "<p>개발 세션은 <strong>203호</strong>에서 진행됩니다.</p>";
+                    break;
+                case "3": res = "<p>디자인 세션은 <strong>205호</strong>에서 진행됩니다.</p>";
+                    break;
+                default: res = "<strong>잘못 입력했습니다.</strong>";
+            }
+            document.getElementById('target').innerHTML = res;
+        }
+    </script>
+</body>
+
+</html>

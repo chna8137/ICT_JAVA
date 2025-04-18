@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exam14</title>
+</head>
+
+<body>
+    <input type="number" name="num" id="num" placeholder="숫자를 입력하세요">
+    <button id="btn">click</button>
+    <div id="res"></div>
+    <script>
+        let button = document.getElementById('btn');
+        button.onclick = function () {
+            let num = parseInt(document.getElementById('num').value);
+            if (num % 3 === 0) {
+                let res = `<span>${num}은 3의 배수 입니다.</span>`;
+                document.getElementById('res').innerHTML = res;
+            } else {
+                let res = `<span>${num}은 3의 배수가 아닙니다.</span>`;
+                document.getElementById('res').innerHTML = res;
+            }
+        }
+    </script>
+</body>
+
+</html>

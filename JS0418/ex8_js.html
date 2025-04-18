@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex8_js</title>
+</head>
+
+<body>
+    <script>
+        let num1 = 10;
+        console.log(`typeof : ${num1} => ${typeof (num1)}`);
+        // BigInt : 숫자 끝에 n을 붙여서 사용하고 무한정(메모리 허용)이다.
+        let BigIntNumber = 123456789012345678901234567890123456789012345678901234567890n;
+        console.log(`typeof : ${BigIntNumber} => ${typeof (BigIntNumber)}`);
+        // JavaScript에서 실수형은 number타입을 사용하여 표현
+        let maxValue = Number.MAX_VALUE;
+        console.log(`Number.MAX_VALUE => ${maxValue}`); // 1.7976931348623157e+308
+        let minValue = Number.MIN_VALUE;
+        console.log(`Number.MIN_VALUE => ${minValue}`); // 5e-324
+        console.log("---------------------------------------");
+
+        // 문자열
+        let greeting = "Hello";
+        console.log(`typeof : ${greeting} => ${typeof (greeting)}`);
+        // 논리형
+        let isEmpty = true;
+        console.log(`typeof : ${isEmpty} => ${typeof (isEmpty)}`);
+
+
+        // 배열 : 자바스크립트의 배열은 객체로 취급
+        // String[] seasons = {"봄", "여름"};
+        let seasons = ['봄', '여름', '가을', '겨울'];
+        console.log(`typeof : ${seasons} => ${typeof (seasons)}, ${seasons[1]}`)
+
+        // 객체 생성
+        let date = new Date();
+        console.log(`typeof : ${date} => ${typeof (date)}`);
+
+        // undefined : 변수가 선언만 되고 값이 할당되지 않은 경우
+        let undefinedVer;
+        console.log(`typeof : ${undefinedVer} => ${typeof (undefinedVer)}`);
+
+        // null : 비어있는 객체 값
+        let nullVar = null;
+        console.log(`typeof : ${nullVar} => ${typeof (nullVar)}`);
+
+    </script>
+</body>
+
+</html>

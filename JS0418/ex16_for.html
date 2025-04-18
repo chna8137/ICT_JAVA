@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex16_for</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 30px;
+            background-color: darkgray;
+        }
+
+        div {
+            margin-bottom: 20px;
+        }
+
+        input[type="number"] {
+            padding: 5px;
+            width: 125px;
+            border-radius: 12px;
+        }
+
+        input[type="button"] {
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 12px;
+        }
+
+        table {
+            width: 200px;
+            border-collapse: collapse;
+            background-color: cornflowerblue;
+        }
+
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: aliceblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div>
+            <input type="number" name="trow" id="trow">
+            <input type="button" value="click" id="btn">
+        </div>
+        <div>
+            <table id="target"></table>
+        </div>
+    </div>
+    <script>
+        document.getElementById('btn').onclick = function () {
+            let trow = document.getElementById('trow').value;
+            let target = document.getElementById('target');
+            let resTr = "";
+            for (let i = 0; i < trow; i++) {
+                resTr += "<tr><td>" + (i + 1) + "</td></tr>";
+            }
+            target.innerHTML = resTr;
+        }
+    </script>
+</body>
+
+</html>

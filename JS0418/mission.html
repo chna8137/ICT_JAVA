@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>mission</title>
+    <style>
+        body {
+            background-color: #d5dadbee;
+        }
+
+        .container {
+            text-align: center;
+
+        }
+
+        .content_container {
+            background-color: #fff;
+            text-align: center;
+            padding: 30px;
+            width: 80%;
+            border-radius: 15px;
+            box-shadow: 1px 2px 1px #000;
+        }
+
+        .table_container {
+            align-items: center;
+        }
+
+        #target {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        #target td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>선택한 구구단 보여주기</h1>
+        <p>1, 3, 5, 7, 9 범위의 단을 보여주고 선택한 단은 중앙에 선택한 색상으로 보여짐</p>
+        <div class="content_container">
+            <div class="content">
+                단 : <input type="text" name="dan" id="dan">
+                범위 : <input type="number" name="area" id="area">
+                색상 : <input type="color" name="color" id="color">
+                <button id="btn">Click</button>
+            </div>
+        </div>
+        <div class="table_container">
+            <table id="target"></table>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('btn').onclick = function () {
+            let dan = parseInt(document.getElementById('dan').value);
+            let area = parseInt(document.getElementById('area').value);
+            let color = document.getElementById('color').value;
+            let target = document.getElementById('target');
+
+            let start = dan - Math.floor(area / 2);
+            let end = dan + Math.floor(area / 2);;
+
+
+            let res = "";
+            if (area % 2 == 0 || area > 10 || area < 1) {
+                alert("올바른 값을 입력해주세요");
+            } else {
+                for (let i = 1; i < 10; i++) {
+                    res += "<tr>";
+                    for (let j = start; j <= end; j++) {
+                        res += `<td>${j} x ${i} = ${j * i}</td>`;
+                    }
+                    res += "</tr>";
+                }
+                target.innerHTML = res;
+            }
+
+
+        }
+
+        // document.write("<div class=\"container pt-5\">"); //ui에 표현
+        // document.write("<table class=\"table table-striped table-hover\">");
+        // for (let i = 1; i < 10; i++) {
+        //     document.write("<tr>");
+        //     for (let j = 2; j < 10; j++) {
+        //         document.write(`<td>${j} x ${i} = ${j * i}</td>`);
+        //     }
+        //     document.write("</tr>");
+        // }
+        // document.write("</table>");
+    </script>
+</body>
+
+</html>

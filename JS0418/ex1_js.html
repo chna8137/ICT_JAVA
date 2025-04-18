@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex1_js.html</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        h1 {
+            color: orangered;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="heading">나의 첫번째 자바스크립트!</h1>
+    <p id="text">위의 텍스트를 클릭 해보기</p>
+    <!-- 내부 스크립트 -->
+    <script>
+        // 변수 선언 및 document 객체주소를 받아와서 변수에 저장
+        let heading = document.getElementById("heading");
+        // click 이벤트가 발생할 때까지 대기하다가 클릭 발생하면 {} 실행한다.
+        heading.onclick = function () {
+            // 자바스크립트에서 Node의 속성을 접근
+            heading.style.color = "skyblue";
+        }
+    </script>
+</body>
+
+</html>

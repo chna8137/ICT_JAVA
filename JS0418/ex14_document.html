@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex14_document.html</title>
+    <style>
+        #target {
+            width: 200px;
+            height: 100px;
+            border: 1px solid #ccc;
+        }
+
+        #target span {
+            color: pink;
+            font-size: 2em;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- value는 폼 형식 안에 있어야 함함 -->
+    <input type="text" name="msg" id="msg">
+    <button id="btn">click</button>
+    <div id="target">히히히</div>
+    <script>
+        // 버튼 선택
+        let button1 = document.getElementById('btn');
+        button1.onclick = function () {
+            // div>값</div => innerHTML = "값";
+            // alert(`입력값 ${msg}`);
+            // 입력폼을 선택해서 속성의 값을 가져오기 -> string으로 가져옴옴
+            let msg = document.getElementById('msg').value;
+            let res = `<span>${msg}</sapn>`;
+            document.getElementById('target').innerHTML = res;
+        }
+
+    </script>
+
+</body>
+
+</html>

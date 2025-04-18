@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: darkslategray;
+        }
+
+        p {
+            margin-top: 80px;
+            font-size: 2em;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            text-shadow: 2px 3px 2px #000;
+        }
+
+        p strong {
+            color: yellow;
+            font-size: 2.2em;
+        }
+
+        strong {
+            color: red;
+            font-size: 2.2em;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        let session = prompt("관심 세션을 선택해주세요. 1-마케팅, 2-개발, 3-디자인");
+
+        switch (session) {
+            case "1": document.write("<p>마케팅 세션은 <strong>201호</strong>에서 진행됩니다.</p>");
+                break;
+            case "2": document.write("<p>개발 세션은 <strong>203호</strong>에서 진행됩니다.</p>");
+                break;
+            case "3": document.write("<p>디자인 세션은 <strong>205호</strong>에서 진행됩니다.</p>");
+                break;
+            default: document.write("<strong>잘못 입력했습니다.</strong>");
+        }
+
+    </script>
+</body>
+
+</html>

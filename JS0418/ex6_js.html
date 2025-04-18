@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex6_js.html</title>
+</head>
+
+<body>
+    <script>
+        /*
+            Number() : 문자열이나 논리형 값을 숫자로 변환
+            parseInt() : 문자열을 정수 숫자로 변환
+            parseFloat() : 문자열을 실수 숫자로 변환
+            String() : 숫자나 논리형을 문자열로 변환
+            Boolean() :  괄호안의 값을 논리형으로 변환
+        */
+        let n1 = typeof (Number('123ABC'));
+        document.write(`Number => ${n1}, ${n1} <br>`);
+        // Number('123ABC') => NaN
+        document.write(`Number => ${Number('123ABC')}, ${n1} <br>`);
+        // parseInt('123AB') => 123
+        document.write(`parseInt1 => ${parseInt('123')}, ${typeof (parseInt('123'))} <br>`);
+        document.write(`parseInt2 => ${parseInt('123AB')}, ${typeof (parseInt('123'))} <br>`);
+        // parseFloat('123.45') => number
+        document.write(`parseFloat1 => ${parseFloat('123.45')}, ${typeof (parseFloat('123.45'))} <br>`);
+        document.write(`parseFloat2 => ${parseFloat('123.45AB')}, ${typeof (parseFloat('123.45AB'))}<br>`);
+        // ----- 문자열 숫자를 변경할 때 Number만 정확한 숫자타입으로 변경되고
+        // ----- parseInt 문자열이 섞여도 숫자만 변환된다.
+
+        document.write(`String => ${String(123)}, ${typeof (String(123))}<br>`);
+        document.write(`Boolean1 => ${Boolean(1)}, ${typeof (Boolean(1))}<br>`); // true
+        document.write(`Boolean2 => ${Boolean(0)}, ${typeof (Boolean(0))}<br>`); // false
+        document.write(`Boolean2 => ${Boolean('AAAAA')}, ${typeof (Boolean('AAAAA'))}<br>`); // true
+        document.write(`Boolean2 => ${Boolean('')}, ${typeof (Boolean(''))}<br>`); // fasle
+
+    </script>
+</body>
+
+</html>
