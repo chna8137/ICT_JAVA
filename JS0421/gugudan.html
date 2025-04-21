@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1> 선택한 구구단 보여주기</h1>
+    <p>1,3,5,7,9 범위의 단을 보여주고 선택한 단은 중앙에 선택한 색상으로 보여짐</p>
+    <div style="width: 500px; margin: auto">
+        <div id="menu">
+            단 :<input type="number" id="dan">
+            범위:<select id="limit">
+                <option value="1">1</option>
+                <option value="3">3</option>
+                <option value="5">5</option>
+                <option value="7">7</option>
+                <option value="9">9</option>
+            </select>
+            색상:<input type="color" id="col">
+            <button id="btn">Click</button>
+        </div>
+        <div id="guguTarget"></div>
+    </div>
+    <script>
+        // step 1) Event 처리
+        document.getElementById('btn').onclick = function () {
+            // step 2) 변수 처리
+            let dan = parseInt(document.getElementById('dan').value);
+            let limit = parseInt(document.getElementById('limit').value);
+            let color = document.getElementById('col').value;
+            // console.log(`dan => ${typeof (dan)}, ${limit}, ${color}`);
+
+            let start = parseInt(dan - (limit / 2) + 1);
+            let end = parseInt(dan + (limit / 2));
+            console.log(start, end);
+
+            // step 3) 요구사항인 구구단을 만들어서 타겟에 출력
+            let tls = "<table border = \"1\">";
+            for (let i = 0; i < 10; i++) {
+                tls += "<tr>";
+                for (let j = start; j <= end; j++) {
+                    if (i === 0) {
+                        tls += `<th>${j}단</th>`
+                    } else {
+                        if (j === dan) {
+                            tls += `<td style="background-color: ${color}">${j}x${i}=${i * j}</td>`;
+                        } else {
+                            tls += `<td>${j}x${i}=${i * j}</td>`;
+                        }
+                    }
+                }
+                tls += "</tr>";
+            }
+            tls += "</table>";
+            document.getElementById('guguTarget').innerHTML = tls;
+
+        }
+    </script>
+</body>
+
+</html>

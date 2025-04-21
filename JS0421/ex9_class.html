@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex9_class</title>
+</head>
+
+<body>
+    <script src="js/class-1.js"></script>
+    <script>
+        // new란 키워드로 함수를 호출하면 -> 생성자 함수를 호출
+        const book1 = new Book2("리액트 정석", 664, false);
+        const book2 = new Book2("jsp의 정석", 300, true);
+
+        console.log(`${book1.title} - ${book1.pages} 쪽 - ${book1.finish()}`);
+        console.log(`${book2.title} - ${book2.pages} 쪽 - ${book2.finish()}`);
+    </script>
+</body>
+
+</html>

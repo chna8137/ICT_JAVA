@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex7_Object</title>
+</head>
+
+<body>
+    <p>
+        <input type="text" name="author" id="author">
+        <input type="button" value="등록" id="btn3">
+    </p>
+    <p>
+        <input type="button" value="구입" id="btn1">
+        <input type="button" value="읽기" id="btn2">
+    </p>
+    <div id="target"></div>
+
+    <script>
+        let book = {
+            title: "잭과 콩나무",
+            pages: 500,
+            buy: function () {
+                return `${this.author}님이 ${this.title}책을 구입했습니다.`;
+            },
+            read() {
+                return `${this.author}님이 이제 ${this.title}책을 읽을 수 있습니다.`;
+            }
+        }
+
+        document.getElementById('btn3').onclick = function () {
+            book.author = document.getElementById('author').value;
+            console.log(book);
+        }
+        document.getElementById('btn1').onclick = function () {
+            book.author = document.getElementById('target').innerHTML = "<p style=\"color:red\">" + book.buy() + "</p>";
+        }
+        document.getElementById('btn2').onclick = function () {
+            book.author = document.getElementById('target').innerHTML = "<p style=\"color:blue\">" + book.read() + "</p>";
+        }
+    </script>
+</body>
+
+</html>

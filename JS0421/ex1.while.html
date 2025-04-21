@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex1.while</title>
+</head>
+
+<body>
+    <h2>숫자를 입력하고 버튼을 눌러보세요</h2>
+    <input type="number" id="num" placeholder="숫자 입력">
+    <button id="btn1">while 실행</button>
+    <button id="btn2">do while 실행</button>
+    <div id="result"></div>
+    <script>
+        document.getElementById('btn1').onclick = function () {
+            let num = parseInt(document.getElementById('num').value);
+            console.log(num);
+            let i = 1; // 초기식
+            let res = "<p>while문 출력</p>";
+            while (i <= num) { // 조건식
+                res += i + " "; // 실행문
+                i++; // 증감식
+            }
+            document.getElementById('result').innerHTML = res;
+        };
+        document.getElementById('btn2').onclick = function () {
+            let num = parseInt(document.getElementById('num').value);
+            console.log(num);
+            let i = 1; // 초기식
+            let res = "<p>do while문 출력</p>";
+            do {
+                res += `<p>${i}</p>`;
+                i++
+            } while (i <= num);
+            document.getElementById('result').innerHTML = res;
+        };
+    </script>
+</body>
+
+</html>

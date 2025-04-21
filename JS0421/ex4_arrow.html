@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex4_arrow</title>
+</head>
+
+<body>
+    <script>
+        const hi = function () {
+            return "안녕하세요";
+        }
+        console.log(hi());
+
+        // 화살표 함수로 변환
+        const hi2 = () => { return "안녕하세요" };
+        console.log(hi2());
+
+        const hi3 = () => "안녕하세요";
+        console.log(hi3());
+        console.log("************************");
+
+        // 매개 변수가 1개인 함수
+        let hi4 = function (user) {
+            document.write(`${user}님, 안녕하세요?<br>`);
+        }
+        hi4("테스형");
+
+        // 매개 변수가 1개인 화살표 함수
+        let hi5 = user => document.write(`${user}님, 안녕하세요?<br>`);
+        hi5("테스형2");
+
+        // 매개변수가 2개인 함수
+        let sum = function (a, b) {
+            return a + b;
+        }
+        document.write(sum(19, 1) + "<br>");
+
+        let sum2 = (a, b) => a + b;
+        document.write(sum2(19, 1));
+    </script>
+</body>
+
+</html>

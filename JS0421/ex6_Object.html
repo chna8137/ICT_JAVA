@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex6_Object.html</title>
+</head>
+
+<body>
+    <script>
+        let student = {
+            name: "테스형",
+            score: {
+                history: 85,
+                science: 95,
+                average: function () {
+                    // 메서드 안에서 자신을 참조 this
+                    return (this.history + this.science); // 2
+                }
+            }
+        };
+        console.log(student.name);
+        console.log(student.score.average());
+
+    </script>
+
+</body>
+
+</html>

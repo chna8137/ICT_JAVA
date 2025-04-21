@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex2_funtion</title>
+    <style>
+        #container {
+            width: 450px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <input type="number" id="num1" name="num1">
+        <input type="number" id="num2" name="num2">
+        <input type="button" id="btn" value="Add">
+        <p id="target"></p>
+    </div>
+    <script>
+        function addNumber(num1, num2) {
+            let sum = parseInt(num1) + parseInt(num2);
+            return sum;
+        }
+        document.getElementById('btn').onclick = function () {
+            let num1 = document.getElementById('num1').value;
+            let num2 = document.getElementById('num2').value;
+            console.log(`${num1} ${num2}`);
+            let res = addNumber(num1, num2);
+            console.log(`res => ${res}`);
+            document.getElementById('target').innerHTML = res;
+        }
+    </script>
+</body>
+
+</html>

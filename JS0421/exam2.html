@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exam2</title>
+</head>
+
+<body>
+    <div>
+        <input type="number" name="num" id="num">
+        <input type="button" id="btn" value="Click">
+        <div id="target"></div>
+    </div>
+    <script>
+        function holjak(n) {
+            let num = parseInt(n);
+            let res = ""
+            if (n % 2 === 0) {
+                res = `${num}은 짝수`;
+            } else {
+                res = `${num}은 홀수`;
+            }
+            return res;
+        }
+        // document.getElementById('btn').onclick = function () {
+        document.querySelector("#btn").addEventListener("click", function () {
+            let num = document.getElementById('num').value;
+            let res = holjak(num);
+            document.getElementById('target').innerHTML = res;
+
+        });
+
+
+        // }
+    </script>
+</body>
+
+</html>

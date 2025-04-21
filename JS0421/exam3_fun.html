@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exam3_fun</title>
+</head>
+
+<body>
+    <input type="number" name="num" id="num" placeholder="숫자 입력">
+    <button id="btn">합계 계산</button>
+    <button id="btn2">즉시 실행</button>
+    <div id="target"></div>
+
+    <script>
+        // btn이 클릭 될 때 1부터 num까지의 함계를 출력하는 함수 익명 함수로 정의
+        document.querySelector("#btn2").addEventListener("click", function () {
+            let num = document.getElementById("num").value;
+            const calcSum = (function (n) {
+                let total = 0;
+                for (let i = 1; i <= n; i++) {
+                    total += i;
+                }
+                return total;
+            })(num);
+
+
+            document.getElementById('target').innerHTML = `${calcSum}`;
+
+        })
+    </script>
+</body>
+
+</html>

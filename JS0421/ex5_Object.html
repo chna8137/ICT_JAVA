@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex5_Object</title>
+</head>
+
+<body>
+    <script>
+        let book1 = {
+            title: "ICT Password Less",
+            content: "오늘은 리액트에서 자주 사용되는 자바스크립트 객체!",
+            hit: 100
+        };
+        console.log(typeof (book1)); // object
+        console.log(book1);
+
+        // 조회수 수정
+        book1.hit = 1000;
+        console.log(`조회수 : ${book1.hit}`); // 1000
+
+        // 새로운 프로퍼티 추가
+        book1.pages = 50;
+        console.log(book1);
+
+        // 저자 추가하기
+        book1.author = "테스형";
+        console.log(book1);
+
+        // 프로퍼티 삭제
+        delete book1.pages;
+        console.log(book1);
+
+        // 프로퍼티에서 프로퍼티의 키 값만 그대로 두고 값을 필요없을 때...
+        book1.author = undefined;
+        console.log(book1);
+    </script>
+</body>
+
+</html>

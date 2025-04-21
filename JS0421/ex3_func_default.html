@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex3_func_default</title>
+</head>
+
+<body>
+    <hr>
+    <p id="target"></p>
+    <script>
+        // ES6부터 함수에서 매개 변수를 선언할 때 기본값을 지정
+        function multiple(a, b = 5, c = 10) {
+            return a * b + c;
+        }
+
+        // 함수 호출
+        console.log(`${multiple(5, 10, 20)}`); // a = 5, b = 10, c = 20 => 70
+        console.log(`${multiple(10, 20)}`); // a = 10, b = 20, c = 10(기본값) => 210
+        console.log(`${multiple(30)}`); // a = 30, 나머지는 기본값 => 160
+
+        // 익명함수
+        let myAdd = function (a, b) {
+            return a + b;
+        }
+        document.write(`익명함수 실행 : ${myAdd(19, 1)} <br>`);
+
+        // 즉시 실행함수
+        (function () {
+            let userName = "테스형";
+            document.write(`안녕하세요 ${userName}님!`)
+        })();
+
+        // 매개 변수가 있는 타입
+        (function (a, b) {
+            let sum = a + b;
+            alert("sum : " + sum);
+        })(100, 200);
+    </script>
+</body>
+
+</html>
