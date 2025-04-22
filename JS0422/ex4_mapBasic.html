@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex4_mapBasic.html</title>
+</head>
+<body>
+    <script>
+        //split("구분자"):Array 
+        let str = "바나나,사과,체리,딸기,귤";
+         // 문자열을 쉼표로 구분하여 배열로 변환
+        let fruitsArray = str.split(',');
+        //object => 바나나
+        console.log(`${typeof(fruitsArray)} => ${fruitsArray[0]}`);
+
+        //만약 fruitsArray에서 각 과일 이름에 " 맛있다" 추가하해서 [다시 배열]로 만들려면?
+        let newfruitsArray = new Array();
+        for(let i = 0; i< fruitsArray.length; i++){
+            newfruitsArray[i] = fruitsArray[i]+" 맛있다!";
+        }
+        // ['바나나 맛있다!', '사과 맛있다!', '체리 맛있다!', '딸기 맛있다!', '귤 맛있다!']
+        console.log(newfruitsArray);
+        console.log(`${typeof(newfruitsArray)} => ${newfruitsArray[0]}`);
+        // 각 과일 이름에 " 맛있다!"라는 문장을 추가
+        // map() 함수는 배열의 각 요소에 대해 함수를 호출하여, 새로운 배열을 반환
+        // for문을 사용하지 않고 배열에서 꺼내서 조작이 가능한 함수 map 
+        // Array.map((e) => { e를 실행문; })
+        let mapFruits = fruitsArray.map(fruit => fruit +" 맛있다!");
+        console.log(mapFruits);
+        console.log(`${typeof(mapFruits)} => ${mapFruits[0]}`);
+
+
+    </script>
+</body>
+</html>

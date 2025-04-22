@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex5_map.html</title>
+<style>
+    #container{ width: 500px; margin: auto;}
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th,td{
+        padding: 8px; text-align: center; border-bottom: 1px solid #ddd;
+    }
+    tr:hover{ background-color: cornflowerblue;}
+    /*버튼의 공통적인 css*/
+    .button {
+            background-color: #ddd;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+        #btn1 {
+            background-color: white;
+            color: black;
+            border: 2px solid #ed9907;
+        }
+        #btn1:hover{
+            background-color: #ed9907;
+            color: white;
+        }
+        #btn2 {
+            background-color: white;
+            color: black;
+            border: 2px solid #1307ed;
+        }
+        #btn2:hover{
+            background-color: #1307ed;
+            color: white;
+        }
+</style>    
+</head>
+<body>
+    <div id="container">
+        <h1>Map활용해보기</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>나이</th>
+                </tr>
+            </thead>
+            <tbody id="target"></tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <button id="btn1" class="button">클릭1</button>
+                        <button id="btn2" class="button">클릭2</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <script>
+        // 배열에 사용자의 데이터를 {} 에 저장해서 만든다.
+        let myData =[{num:1,name:"테스형",age:20},
+        {num:2,name:"테구형",age:30},{num:3,name:"오스형",age:22}];
+        document.getElementById('btn1').addEventListener('click', function() {
+            //alert("첫번째 버튼");
+            let target = document.getElementById('target');//tbody
+            target.innerHTML = ''; 
+            //[i=0=>{num:1,name:"테스형",age:20}]
+            for (let i = 0; i < myData.length; i++) {
+                let row = document.createElement('tr');
+                let numCell = document.createElement('td');
+                //td 요소안에 데이터를 배치 
+                numCell.innerHTML = myData[i].num;
+                let nameCell = document.createElement('td');
+                nameCell.innerHTML = myData[i].name;
+                let ageCell = document.createElement('td');
+                ageCell.innerHTML = myData[i].age;
+                //tr에 (자식요소:appendChild) td요소를 배치
+                row.appendChild(numCell);
+                row.appendChild(nameCell);
+                row.appendChild(ageCell);
+                 // tbody (자식요소:appendChild) tr요소를 배치
+                target.appendChild(row);
+            }
+        });
+        document.getElementById('btn2').addEventListener('click', function() {
+            //alert("두번째 버튼");
+            let target = document.getElementById('target');//tbody
+            target.innerHTML = ''; 
+            //배열요소를 반복하면서 하나씩 꺼내어서 item 전달하고
+            // => {실행}
+            // item은 각 배열안에  있는 Object들의 주소 값이다. 
+            // item => {num:1,name:"테스형",age:20}
+            // Array.map((e)=>{})
+            myData.map(item => {
+                let row = document.createElement('tr');
+                let numCell = document.createElement('td');
+                //td 요소안에 데이터를 배치 
+                numCell.innerHTML = item.num;
+                let nameCell = document.createElement('td');
+                nameCell.innerHTML = item.name;
+                let ageCell = document.createElement('td');
+                ageCell.innerHTML = item.age;
+                //tr에 (자식요소:appendChild) td요소를 배치
+                row.appendChild(numCell);
+                row.appendChild(nameCell);
+                row.appendChild(ageCell);
+                 // tbody (자식요소:appendChild) tr요소를 배치
+                target.appendChild(row);
+            }); 
+        });
+    </script>
+</body>
+</html>

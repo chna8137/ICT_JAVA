@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex7_Reduce.html</title>
+</head>
+<body>
+    <h1>Reduce</h1>
+    <p>누적 계산을 한 후 하나의 값을 생성한다.
+       합계나 평균, 객체 변환 등으로 사용된다. 
+    </p>
+    <div id="target"></div>
+    <div id="target2"></div>
+    <div id="target3"></div>
+    <script>
+        let fruitsData = "사과,배,사과,배,배,배,사과";
+        let fruitsArray = fruitsData.split(",");
+        console.log(fruitsArray);
+        (function(fruitsArray){
+            // 빈도수를 저장할 객체 
+            let fruitCount = {};
+            for (let i = 0; i < fruitsArray.length; i++) {
+                //요소를 하나씩 꺼낸다.
+                let fruit = fruitsArray[i];
+                // 새로운 데이터냐 아니냐 
+                if (fruitCount[fruit]) {// 존재하면
+                    fruitCount[fruit] += 1;   // 이미 존재하면 1 더하기
+                } else { // 새로운 데이터면 
+                    fruitCount[fruit] = 1;   // 처음 등장하면 1로 초기화
+                }
+            }
+            console.log(fruitCount);
+            let target = document.getElementById('target');
+            let output = "<ul>"; 
+            // for in문 
+            for (let fruit in fruitCount) {
+                output += "<li>" + fruit + ": " + fruitCount[fruit] + "회</li>";
+            }   
+            output += "</ul>";
+            target.innerHTML = output; 
+        })(fruitsArray);
+        // 다음 코드를 arrow로 변경하고, output을 createElement로 변경해서 구현 합시다.
+        /*
+        (function(item){ item사용하면됨})(itemVal);
+        ((item)=>{ item사용하면됨 })(itemVal);*/
+        //()();
+        //function(){} -> () => {} 
+        (fruitsArray => {
+            // 빈도수를 저장할 객체 
+            let fruitCount = {};
+            //for -> map => Array.map(e =>{})
+            fruitsArray.map(fruit => {
+            //요소를 하나씩 꺼낸다.
+            //let fruit = fruitsArray[i];
+            // fruitCount[fruit]가 이미 존재하면 1을 더하고, 그렇지 않으면 1로 초기화
+            // 이아래 부터는 Object에서 판별 
+            if (fruitCount[fruit]) {
+                    fruitCount[fruit] += 1;  // 이미 존재하면 1 더하기
+                } else {
+                    fruitCount[fruit] = 1;   // 처음 등장하면 1로 초기화
+                }
+            });
+            console.log(fruitCount);
+            // createElemet() 변경한 예 
+            let target = document.getElementById('target2');
+            //let output = "<ul>";  // 리스트 형태로 출력
+            let output =  document.createElement("ul");
+            for (let fruit in fruitCount) {
+                //output += "<li>" + fruit + ": " + fruitCount[fruit] + "회</li>";
+                let lis = document.createElement("li");
+                lis.innerHTML =  fruit + ": " + fruitCount[fruit] + "회";
+                output.appendChild(lis);
+            }
+            //output += "</ul>";
+            target.appendChild(output)
+        })(fruitsArray);
+        console.log(fruitsArray.length);//7
+        console.log(...fruitsArray); // 문자열로도 출력 
+        (function(fruitsArray){
+            // reduce 누적시킬때 사용하는 함수
+            // 초기값은 빈 객체 {}로 설정 , acc[fruit] => acc 객체에서 현재 과일 이름을 키로 사용하여 값을 조회
+             //만약 해당 과일이 처음 등장하면 undefined를 반환
+             // fruitCount = {"사과":undefined=>0+1;"배":undefined=>0+1}
+             // 배열의 인덱스가 2인 데이터일 때 {"사과":1+1;"배":undefined=>0+1} 
+            // 빈도수를 저장할 객체 
+            // let fruitCount = {};
+            /*
+               let fruitCounts = 배열.reduce((acc,val) => {
+                    //연산   =>  acc[fruit] = (acc[fruit] || 0) + 1;
+                    retrun acc;
+                },{})
+           */
+             let fruitCounts = fruitsArray.reduce((acc,fruit)=>{
+                console.log(`MyLog1 => ${acc[fruit]},fruit => ${fruit}`);
+                 //acc[fruit] || 0: undefined일 경우에는 0으로 초기화 하란 식이다.
+                // 0 + 1로 acc["사과"] = 1
+                // 위의 if문에서 else해당 되는 즉,   처음 등장하면 1로 초기화
+                acc[fruit] = (acc[fruit]||0) + 1; // 처음이면 1, 아니면 +=1 
+                console.log(`MyLog2 => ${acc[fruit]}`);
+                //변수로 저장이 될때 그변수의 반환값이 반드시 있어야 한다.
+                return acc;
+             },{});     
+             console.log("reduce 로 만든 빈도수 ")
+             console.log(fruitCounts);  /*{사과: 3, 배: 4}*/      
+        })(fruitsArray);
+/*
+filter: 체로 걸러낸다
+
+map: 스탬프로 새 모양을 찍는다
+
+reduce: 하나의 덩어리로 압축한다
+*/        
+    </script>
+</body>
+</html>

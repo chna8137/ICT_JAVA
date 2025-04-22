@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex7_reduceBasic.html</title>
+</head>
+
+<body>
+    <script>
+        let nums = []; // 1 ~ 10까지 
+        for (let i = 1; i <= 10; i++) {
+            nums.push(i);
+        }
+        console.log(nums);
+        // Array.from(배열의길이,(key,n) => 연산 )
+        let nums1 = Array.from({ length: 10 }, (i, n) => n + 1);
+        console.log(nums1)
+        console.log("----------------");
+       /*
+        배열.reduce((누적값, 현재값) => {
+            return 처리결과;
+            }, 초기값);
+        */
+        let tot = 0;
+        nums1.forEach(e => {
+            tot += e;
+        });
+        //alert(tot);//55
+        let sum = nums1.reduce((total, n) => total + n,0);
+        console.log(`초기값 생략 결과 :${sum}`); //55
+
+        // 초기값 생략 한 결과 - 즉 비어있는 배열을 사용할 경우 
+        //Reduce of empty array with no initial value at Array.reduce (<anonymous>)
+        let nums2 = [];
+        let sum2 = nums2.reduce((total,n) => total+n,0);
+        console.log(sum2);
+        console.log("String : 문자열을 합치는 기능");
+        let fruits = ["사과","바나나","포도"];
+        let result = fruits.reduce((a,b) => a +"<br>"+b,"");
+        document.write(result);
+    </script>
+</body>
+
+</html>

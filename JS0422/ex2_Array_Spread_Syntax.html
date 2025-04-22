@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex_Array_Spread_Syntax.html</title>
+</head>
+
+<body>
+    <script>
+        //배열 합치기 
+        //ES5까지는 concat() 메서드를 사용했고 => arr.concat(배열또는값, 배열또는값,.....)
+        //ES6부터는 전개연산자(...) 많이 사용함
+        let varr = ["양배추","토마토","피클"];
+        let meat = ["불고기"];
+        //let myBurger = varr.concat(meat,"빵");// 앞에 만든 배열에 새로운 배열 요소인 "빵"를 추가 
+        //console.log(myBurger);
+        let myBurger = meat.concat("빵",varr);// 불고기 + 빵 + 나머지
+        console.log(myBurger);
+        //... 예
+        let cheese = ["모짜렐라","슈레드"];
+        let cheeseBurger = ["빵",...varr,...cheese];
+        console.log(cheeseBurger);
+
+        let fruits = ["apple", "banana", "grape"];
+       //출력해보기  
+       fruits.forEach((e) => { console.log(e)});
+       console.log("-----------------");
+       //// 문자열로 for문없이 출력이 가능
+       console.log(...fruits); //apple banana grape
+       let myfruits = [...fruits]
+       console.log(myfruits)
+       //배열에서 주어진 구분자를 기준으로 문자열로 반환 
+       document.writeln(fruits.join(','));
+
+     //다음과 같은 함수의 매개 변수로 배열의 값을 전달 할때
+     function sum(x, y, z) {
+            return x + y + z;
+     }
+     //매개변수로 전달할 배열 
+     const numbers = [1, 2, 3];
+     document.writeln(`<p>${sum(numbers[0],numbers[1],numbers[2])}</p>`);//6
+     //function.apply(null,arrays) - 개념만.
+     document.writeln(`<p>${sum.apply(null,numbers)}</p>`); // 6
+     document.writeln(`<p>${sum(...numbers)}</p>`); //배열 자체의 주소를 던진다. 6
+
+      // 함수의 매개변수에 ...numbers : VariableArgments [가변 길이 매개변수]
+      function addNum(...numbers){
+        //numbers.forEeach((e) => {}) : 배열 자체가 가지고 있는 foreach
+        let sum = 0;
+        //foreach
+        for(let e of numbers){
+            sum += e;
+        }
+        return sum;
+      }
+    document.write(`<p>매개변수 2개 전달 ${addNum(1, 3)}`);
+    document.write(`<p>매개변수 5개 전달 ${addNum(1, 3, 5, 7, 9)}`);
+   </script>
+</body>
+
+</html>

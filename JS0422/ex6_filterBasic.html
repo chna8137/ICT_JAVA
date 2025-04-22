@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex6_filterBasic.html</title>
+</head>
+<body>
+    <script>
+         let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+         //짝수만 찾아서 새로운 배열에 저장해보기
+         //let evenNumbers
+         let evenNumbers = [];
+         numbers.forEach((n)=>{
+            if(n % 2 === 0){
+                evenNumbers.push(n);
+            }
+         });
+         console.log(evenNumbers);
+         console.log("===================");
+         let evenNumbers2 = new Array();
+         for(let e of numbers){
+            if(e % 2 === 0){
+                evenNumbers2.push(e);
+            }
+         }
+         console.log(evenNumbers2);
+         //filter()는 조건에 맞는 것만 추출해서 배열로 반환 
+         let evenNumbers3 = numbers.filter(number => number % 2 ===0);
+         console.log(evenNumbers3);
+    </script>
+</body>
+</html>

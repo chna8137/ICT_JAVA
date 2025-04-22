@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex1_array.html</title>
+</head>
+
+<body>
+    <script>
+        //배열 선언하고 생성
+        let season = [];
+        console.log(season);
+        //배열에 값을 저장 
+        season[0] = 'spring';
+        season[1] = "summer";
+        console.log(season);
+
+        let pets = ["dog","cat","parrot"];
+        console.log(pets);
+
+        //Array객체 인스턴스 
+        let fruits = new Array("사과","복숭아","포도");
+        console.log(fruits);       
+        fruits[4] = "배"; 
+        console.log(fruits); 
+        // ['사과', '복숭아', '포도', empty, '배']
+        console.log(`비어있는 인덱스 출력 ${fruits[3]}`); //undefined
+        console.log(`배열의 길이:${fruits.length}`);//5
+        
+        //for문을 사용해서 fruits의 배열을 화면에 출력 
+        document.write("<h2>기본 for</h2>");
+        for(let i=0; i<fruits.length; i++){
+            document.write(`<p>${fruits[i]}</p>`);
+        }
+        document.write("<hr>");
+        document.write("<h2>forEach()</h2>");
+        let animals = ["tiger","lion","bear","bird"];
+        //배열 요소를 반복               arr.forEach((e)=>{}); *****
+        //배열 요소를 반복시 인덱스       arr.forEach((e,idx) => {});  *****
+        //배열 요소를 반복 인덱스 , array arr.forEach((e,idx,array) => {});
+        // () => {} , (()=>{})();
+        animals.forEach((e,i)=>{
+            document.writeln(`<p> ${i} => ${e}`);
+        });
+        animals.forEach((e,i,array)=>{
+            document.write(`<p>[${array}][${i}] => ${e}</p>`);
+        });
+    </script>
+</body>
+
+</html>
