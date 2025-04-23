@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="width: 800px; margin: auto;">
+        <h1>Ajax 예제</h1>
+        <table style="width: 100%;">
+            <thead style="background-color: blueviolet; color: aliceblue; text-align: center;">
+                <tr>
+                    <td>이름</td>
+                    <td>메세지</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="result">
+                    <td id="name"></td>
+                    <td id="message"></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <button id="btn1">클릭</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <script>
+        function sendAjaxRequest() {
+            // step1 ) 비동기식 통신을 위한 Ajax객체
+            let xhr = new XMLHttpRequest();
+
+            // step2 ) 비동기식을 보낼 서버의 주소를 변수에 담기기
+            // Access-Control-Allow-Origin - 서버측에서 응답에 대한 Cross Origin을 허용해야 함
+            let url = "http://192.168.0.24/ajaxApp0423/message.jsp";
+
+            // step3 ) 비동기식으로 서버에 보낼 method, url, 비동기식으로 준비하는 함수
+            xhr.open("GET", url, true); // true : 비동기식으로 보내겠다는 뜻
+
+            // step4 ) 요청이 완료되면 처리할 함수 => CallBack 함수
+            xhr.onreadystatechange = function () {
+                // readState === 4번 : 서버가 정상적이다.
+                // xhr.status == 200번 : 정상적인 응답
+
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(`Response : ${xhr.responseText}`); // 데이터를 받으려면 responseText
+                }
+            }
+
+            // step5 ) 요청을 전송한다.
+            xhr.send();
+        }
+        document.getElementById('btn1').addEventListener("click", () => {
+            // alert("test");
+            sendAjaxRequest();
+        });
+    </script>
+</body>
+
+</html>

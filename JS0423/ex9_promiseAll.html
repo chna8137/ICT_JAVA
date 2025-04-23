@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex9_promiseAll</title>
+</head>
+
+<body>
+    <script>
+        function getData(msg, time) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve(msg);
+                }, time);
+            });
+        }
+
+        // 여러 개의 Promise를 병렬 실행하고 모두 끝났을 때 처리
+        Promise.all([ // 시간과 상관없이 처리가 모두 끝났을 때 한 방에 처리함
+            getData("사과", 1000),
+            getData("바나나", 1500),
+            getData("포도도", 500)
+        ]).then(res => {
+            console.log("모든 과일이 만들어졌습니다.", res);
+        })
+
+        console.log("----------------------");
+
+
+
+        function getData(msg, time, choose) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if (choose) {
+                        setTimeout(() => {
+                            resolve(msg);
+                        }, time); // 성공
+                    } else {
+                        setTimeout(() => {
+                            reject(msg);
+                        }, time); // 실패
+                    }
+                }, time); // 바깥 setTimeout 닫기
+            }); // Promise 닫기
+        }
+
+        // 여러 개의 Promise를 병렬 실행하고 모두 끝났을 때 처리
+        Promise.all([ // 시간과 상관없이 처리가 모두 끝났을 때 한 방에 처리함
+            getData("사과", 1000, true),
+            getData("바나나", 1500, false),
+            getData("포도도", 500, true)
+        ]).then(res => {
+            console.log("모든 과일이 만들어졌습니다.", res);
+        }).catch(err => {
+            console.error("에러 발생", err)
+        })
+
+        console.log("---------------");
+        function getData2(msg, time, choose) {
+            return new Promise((resolve, reject) => {
+                if (choose) {
+                    setTimeout(() => {
+                        resolve(msg);
+                    }, time); // 성공
+                } else {
+                    setTimeout(() => {
+                        reject(msg);
+                    }, time); // 실패
+                }
+            }); // Promise 닫기
+        }
+
+        // 여러 개의 Promise를 병렬 실행하고 모두 끝났을 때 처리
+        Promise.allSettled([ // 시간과 상관없이 처리가 모두 끝났을 때 한 방에 처리함
+            getData2("사과", 1000, true),
+            getData2("바나나", 1500, false),
+            getData2("포도도", 500, true)
+        ]).then(res => {
+            console.log("allSettled 모든 과일이 만들어졌습니다.", res);
+
+            res.map(e => {
+                document.write(e.value + "<br>");
+            })
+        }).catch(err => {
+            console.error("에러 발생", err)
+        })
+    </script>
+</body>
+
+</html>

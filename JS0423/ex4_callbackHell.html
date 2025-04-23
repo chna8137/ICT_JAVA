@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex4_callbackHell.html</title>
+</head>
+
+<body>
+    <script>
+        setTimeout(function () {
+            console.log("1초 후 실행");
+
+            setTimeout(function () {
+                console.log("2초 후 실행");
+
+                setTimeout(function () {
+                    console.log("3초 후 실행");
+                }, 1000);
+            }, 1000);
+        }, 1000);
+    </script>
+</body>
+
+</html>

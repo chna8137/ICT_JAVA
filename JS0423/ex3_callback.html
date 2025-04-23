@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex3_callback</title>
+</head>
+
+<body>
+    <script>
+        function greet(name, callback) {
+            console.log("안녕" + name);
+            callback();
+        }
+        greet("테스형", function () {
+            console.log("반가워!");
+        });
+
+        setTimeout(function () {
+            document.write("Test");
+        }, 3000);
+        // // 지정한 초에 계속 함수를 호출
+        // let i = 0;
+        // setInterval(function () {
+        //     document.write(`i => ${i} <br>`);
+        //      i++;
+        // }, 1000);
+    </script>
+</body>
+
+</html>

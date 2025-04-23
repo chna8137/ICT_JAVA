@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex6_NotCallbackHellPromise</title>
+</head>
+
+<body>
+    <script>
+        function delay(msg, time) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    console.log(msg);
+                }, time)
+            })
+        }
+        delay("1초 후 실행", 1000)
+            .then(() => delay("2초 후 실행", 1000))
+            .then(() => delay("3초 후 실행", 1000))
+
+    </script>
+</body>
+
+</html>

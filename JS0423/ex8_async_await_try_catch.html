@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex8_async_await_try_catch</title>
+</head>
+
+<body>
+    <div style="width: 300px; margin: 20px auto;">
+        <h1>로그인</h1>
+        <input type="text" name="username" id="username" placeholder="사용자 입력(admin or guest)">
+        <button onclick="run()">Login</button>
+        <div id="result"></div>
+    </div>
+    <script>
+
+        // 가상 로그인 Promise 함수
+        function demoLogin(user) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if (user === "admin") {
+                        resolve("로그인 성공 : 관리자님 환영합니다.");
+                    } else {
+                        reject("로그인 실패 : 접근 권한이 없습니다.");
+                    }
+                }, 1000);
+            });
+        }
+
+
+        async function run() {
+            // alert("Click!");
+            const user = document.getElementById("username").value;
+            // reject ~
+            try {
+                // Promise 기다리는 설정
+                let msg = await demoLogin(user);
+                document.getElementById('result').innerHTML = msg;
+            } catch (error) {
+                document.getElementById('result').innerHTML = error;
+
+            }
+        }
+    </script>
+</body>
+
+</html>
