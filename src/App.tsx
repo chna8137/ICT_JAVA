@@ -1,28 +1,32 @@
 import React from 'react';
-import Ex1_useMemo from './comp1/Ex1_useMemo';
-import Ex2_PersonForm from './comp1/Ex2_PersonForm';
-import Ex3_PersonUseMemo from './comp1/Ex3_PersonUseMemo';
-import ParentA from './comp2/ParentA';
-import ParentB from './comp2/ParentB';
-import Ex1_useState from './comp3/Ex1_useState';
-import Ex2_FlowReactStateDemo from './comp3/Ex2_FlowReactStateDemo';
-import Ex3_BatchUpdateExample from './comp3/Ex3_BatchUpdateExample';
-import Ex4_useEffect from './comp3/Ex4_useEffect';
-import Ex1_UseEffectFetch from './compfetch/Ex1_UseEffectFetch';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import Layout from './comp/Layout';
+import Home from './conts/Home';
+import BoardList from './conts/BoardList';
+import Gallery from './conts/Gallery';
+import Chart from './conts/Chart';
+import Community from './conts/Community';
+import Diary from './conts/Diary';
+import Login from './conts/Login';
+import Signup from './conts/Signup';
+
 
 function App() {
   return (
-    <div>
-      {/* <Ex1_useMemo /> */}
-      {/* <Ex2_PersonForm /> */}
-      {/* <Ex3_PersonUseMemo /> */}
-      {/* <ParentB /> */}
-      {/* <Ex1_useState /> */}
-      {/* <Ex2_FlowReactStateDemo /> */}
-      {/* <Ex3_BatchUpdateExample /> */}
-      {/* <Ex4_useEffect /> */}
-      <Ex1_UseEffectFetch />
-    </div>
+    <Router> {/* 전체 라우팅 시스템의 루트(최상단) */}
+      <Layout>
+        <Routes> {/* 여러개의 Route를 묶는 컨테이너(부모) 역할 */}
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/' element={<Home />} /> {/* 각각 path와 연결된 컴포넌트를 정의 */}
+          <Route path='/board' element={<BoardList />} />
+          <Route path='/gallary' element={<Gallery />} />
+          <Route path='/chart' element={<Chart />} />
+          <Route path='/community' element={<Community />} />
+          <Route path='/diary' element={<Diary />} />
+        </Routes>
+      </Layout>
+    </Router>
   );
 }
 
