@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #container {
+            max-width: 1000px;
+            margin: 20px auto;
+            width: 100%;
+
+        }
+
+        header,
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+
+        nav {
+            background-color: #f2f2f2;
+            padding: 1em;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav .nav-link {
+            display: flex;
+            /* justify-content: center; */
+            margin: 10px 20px;
+            text-decoration: none;
+            color: black;
+
+        }
+
+
+        h1 {
+            text-align: center;
+        }
+
+        .prod-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+
+        .prod-list li {
+            padding: 0;
+            margin: 10px;
+            overflow: hidden;
+            flex-basis: calc(33.333% - 20px);
+            position: relative;
+
+        }
+
+        .prod-list img {
+            width: 100%;
+            height: auto;
+            z-index: 5;
+            object-fit: cover;
+
+        }
+
+        /* 제품 설명 하는 영역 / 부모(relative) */
+        .prod-list .caption {
+            position: absolute;
+            top: 200px;
+            width: 100%;
+            height: 200px;
+            padding-top: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            /* 기본 상태에서는 안보이게 설정 */
+            transition: all 0.6s ease-in-out;
+            z-index: 10;
+        }
+
+        .prod-list li:hover .caption {
+            opacity: 1;
+            /*설명 글을 화면에 나타나게*/
+            transform: translateY(-200px);
+            /*설명 글을 위쪽으로 200px 이동*/
+            cursor: pointer;
+        }
+
+        .prod-list .caption h2,
+        .prod-list .caption p {
+            color: #fff;
+            text-align: center;
+        }
+
+        @media screen and (min-width:481px) and (max-width: 768px) {
+            nav {
+                /* display: flex;
+                flex 설정 */
+                flex-direction: column;
+                /* 세로 방향 정렬*/
+                justify-content: center;
+                /* 수직 가운데 정렬*/
+                align-items: center;
+                /* 수평 가운데 정렬*/
+
+            }
+
+            .prod-list li {
+                flex: 0 0 50%;
+                /* 고정 비욜 1/3 */
+                max-width: 50%;
+                padding: 0 1em;
+            }
+        }
+
+        @media screen and (max-width:480px) {
+            header {
+                font-size: smaller;
+            }
+
+            nav {
+                flex-direction: column;
+                /* 세로 방향 정렬*/
+                justify-content: center;
+                /* 수직 가운데 정렬*/
+                align-items: center;
+                /* 수평 가운데 정렬*/
+
+            }
+
+            .prod-list li {
+                flex: 0 0 100%;
+                /* 고정 비욜 1/3 */
+                max-width: 100%;
+                padding: 0 1em;
+            }
+
+            .prod-list .caption {
+                opacity: 1;
+                transform: translateY(-200px);
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <header style="height: 50px; align-content: center; font-size: 2.5em;">
+        ICT Password01
+    </header>
+    <nav>
+        <a href="" class="nav-link">홈</a>
+        <a href="" class="nav-link">상품</a>
+        <a href="" class="nav-link">소개</a>
+        <a href="" class="nav-link">연락처</a>
+    </nav>
+    <main>
+        <div id="container">
+            <h1>신상품 목록</h1>
+            <ul class="prod-list">
+            </ul>
+        </div>
+    </main>
+    <footer style="position: fixed;bottom: 0; width: 100%;">
+        @ 2025 ICT Password01. [우리이름]All rights reserved.
+    </footer>
+    <script>
+        let productList = [{ num: 1, title: '제목1', ctt: '설명1', price: '10000', src: "images/prod1.jpg", date: '2025-01-01' },
+        { num: 3, title: '제목3', ctt: '설명3', price: '12000', src: "images/prod1.jpg", date: '2025-03-01' },
+        { num: 2, title: '제목2', ctt: '설명2', price: '11000', src: "images/prod1.jpg", date: '2025-02-01' },
+        { num: 4, title: '제목4', ctt: '설명4', price: '13000', src: "images/prod1.jpg", date: '2025-04-01' },
+        { num: 5, title: '제목5', ctt: '설명5', price: '14000', src: "images/prod1.jpg", date: '2025-05-01' },
+        { num: 6, title: '제목6', ctt: '설명6', price: '15000', src: "images/prod1.jpg", date: '2025-06-01' }
+        ];
+
+        console.log(productList);
+
+        window.onload = function () {
+            renderProducts(productList);
+        }
+
+        function renderProducts(productList) {
+
+            console.log(productList);
+            const ulElement = document.querySelector(".prod-list");
+            ulElement.innerHTML = "";
+            productList.map(product => {
+                const liElement = document.createElement("li");
+                liElement.innerHTML =
+                    `<img src="${product.src}">
+                <div class="caption">
+                    <h2>${product.title}</h2>
+                    <p>${product.ctt}</p>
+                    <p> 가격 : ${parseInt(product.price).toLocaleString()}원</p>
+                    <p>${product.date}</p>
+                </div>`;
+
+                ulElement.appendChild(liElement);
+            });
+
+
+        }
+    </script>
+</body>
+
+</html>
