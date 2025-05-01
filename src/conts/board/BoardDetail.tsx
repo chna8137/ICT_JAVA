@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './board.module.css'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { boardList } from './boardData';
 import { Link } from 'react-router-dom';
 
@@ -12,9 +12,25 @@ const BoardDetail: React.FC = () => {
     // 파라미터를 받아서 변수에 저장하기 위함 *****
     const { id } = useParams<{ id: string }>();
 
-
     const details = boardList.find(item => item.id === Number(id));
     console.log(details);
+
+    const navigate = useNavigate();
+    const delBoard = () => {
+        if (window.confirm("정말로 삭제하시겠습니까?")) {
+            // Argument of type 'string | null' is not assignable to parameter of type 'string'.
+            // => null => '[]' 즉 비어있는 리스트라도 만들어줘야 함.
+            const oriBoardList = JSON.parse(localStorage.getItem('boardList') || '[]');
+            // item.id에 해당 값을 filter로 찾아서 제외한후
+            // 새로운 리스트로 만들어서 다시 스토리지에 저장
+            const newBoardList = oriBoardList.filter((item: any) => item.id !== Number(id));
+            localStorage.setItem('boardList', JSON.stringify(newBoardList));
+
+            alert("삭제되었습니다.");
+            navigate("/board");
+        }
+    }
+
     return (
         <div className={style.container}>
             <h2>게시글 상세내용</h2>
@@ -37,6 +53,7 @@ const BoardDetail: React.FC = () => {
                 <tfoot>
                     <tr>
                         <td colSpan={2} style={{ textAlign: 'center' }}>
+                            <button className={style.button} onClick={delBoard}>삭제</button>
                             <Link to="/board" className={style.button}>목록</Link>
                         </td>
                     </tr>

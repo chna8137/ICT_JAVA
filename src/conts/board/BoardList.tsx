@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './board.module.css'
-import { boardList } from './boardData'
+import { BoardItem, boardList } from './boardData'
 import { Link } from 'react-router-dom'
 
 const BoardList: React.FC = () => {
 
-
+    const [boardList, setBoardList] = useState<BoardItem[]>([]);
+    useEffect(() => {
+        const data = localStorage.getItem("boardList");
+        if (data) {
+            setBoardList(JSON.parse(data))
+        }
+    }, [])
 
     return (
         <div className={style.container}>
