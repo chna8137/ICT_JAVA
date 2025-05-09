@@ -4,7 +4,7 @@
     padding: 30px;
     border: 1px solid #ddd;
     border-radius: 10px;
-    background-color: #F9FFFF;
+    background-color: #ebf5e2;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -30,7 +30,7 @@ select {
 
 .checkButton {
     padding: 8px;
-    background-color: #FF9D6E;
+    background-color: #94B16F;
     border: none;
     border-radius: 4px;
     color: white;
@@ -38,18 +38,19 @@ select {
 }
 
 .checkButton:hover {
-    background-color: #FFB788;
+    background-color: #B3DD7E;
 }
 
 .gender,
-.hobby {
+.skintype {
     display: flex;
+    justify-content: space-evenly;
     gap: 10px;
 }
 
 .submitButton {
     padding: 12px;
-    background-color: #64A0FF;
+    background-color: #94B16F;
     color: white;
     font-weight: bold;
     border: none;
@@ -59,11 +60,54 @@ select {
 }
 
 .submitButton:hover {
-    background-color: #91B9F5;
+    background-color: #B3DD7E;
 }
 
 .error {
     color: red;
     font-size: 13px;
     margin: 0;
+}
+
+/* .backgroundcolor {
+    background-color: #E4F1D7;
+} */
+
+.loginBox {
+    border: 1px solid black;
+    width: 60%;
+    margin: auto;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.input {
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex: 1;
+    width: 80%;
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+.loginButton {
+    padding: 15px;
+    background-color: #94B16F;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    width: 80%;
+    
+}
+
+.loginButton:hover {
+    background-color: #B3DD7E;
 }

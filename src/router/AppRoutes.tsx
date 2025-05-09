@@ -6,12 +6,12 @@ import BoardDetail from '../conts/board/BoardDetail'
 import Gallery from '../conts/gallery/Gallery'
 import Community from '../conts/Community'
 import Diary from '../conts/Diary'
-import Login from '../conts/Login'
 import Signup from '../conts/member/Signup'
 import Chart from '../conts/Chart'
 import GalleryForm from '../conts/gallery/GalleryForm'
 import GalleryDetail from '../conts/gallery/GalleryDetail'
 import { Route, Routes } from 'react-router-dom'
+import Login from '../conts/member/Login'
 
 const AppRoutes: React.FC = () => {
 

@@ -9,9 +9,9 @@ const Signup: React.FC = () => {
         email: '',
         password: '',
         gender: '',
-        hobby: [] as string[], // string 배열이라고 as string[]으로 명시해준 것
+        skintype: [] as string[], // string 배열이라고 as string[]으로 명시해준 것
         birth: '',
-        country: ''
+        // country: ''
     });
 
     // 초기값이 객체고, 그 객체의 타입을 명시해주기 위해" 사용
@@ -38,15 +38,15 @@ const Signup: React.FC = () => {
         if (!form.gender) {
             newErrors.gender = '성별을 선택하세요';
         }
-        if (!form.hobby.length) {
-            newErrors.hobby = '하나 이상의 취미를 선택하세요';
+        if (!form.skintype.length) {
+            newErrors.skintype = '하나 이상의 피부타입을 선택하세요';
         }
         if (!form.birth) {
             newErrors.birth = '생년월일을 입력하세요';
         }
-        if (!form.country) {
-            newErrors.country = '국가를 선택하세요';
-        }
+        // if (!form.country) {
+        //     newErrors.country = '국가를 선택하세요';
+        // }
 
         return newErrors;
     }
@@ -67,7 +67,7 @@ const Signup: React.FC = () => {
             console.log({ [name]: checked ? value : [name].filter(h => h !== value) });
             // (checked === true) : 값에 value를 추가. ["독서"] + "운동" => ["독서", "운동"]
             // (checked === false) : filter를 사용해서 "운동" 해제 했다면 => ["독서"]
-            setForm(prev => ({ ...prev, hobby: checked ? [...prev.hobby, value] : prev.hobby.filter(h => h !== value) }))
+            setForm(prev => ({ ...prev, skintype: checked ? [...prev.skintype, value] : prev.skintype.filter(h => h !== value) }))
         } else {
             console.log("Checkbox가 아닙니다");
             console.log(`name => ${name}, value => ${value}`);
@@ -110,7 +110,7 @@ const Signup: React.FC = () => {
             setErrors(myErrors);
         } else {
             // 서버로 전송
-            console.log("선택한 취미들 :", form.hobby);
+            console.log("선택한 취미들 :", form.skintype);
         }
 
     }
@@ -128,29 +128,31 @@ const Signup: React.FC = () => {
                     값이 없을 때 메세지를 저장한 키값을 만들어진다. */}
                 {errors.username && <p className={style.error}>{errors.username}</p>}
                 {errors.idCheck && <p className={style.error}>{errors.idCheck}</p>}
-                <label>이메일</label>
-                <input type="email" name="email" id="email" onChange={memberChange} />
-                {errors.email && <p className={style.error}>{errors.email}</p>}
                 <label>비밀번호</label>
                 <input type="password" name="password" id="password" onChange={memberChange} />
                 {errors.password && <p className={style.error}>{errors.password}</p>}
+                <label>이메일</label>
+                <input type="email" name="email" id="email" onChange={memberChange} />
+                {errors.email && <p className={style.error}>{errors.email}</p>}
+            
                 <label>성별</label>
                 <div className={style.gender}>
                     <label><input type="radio" name="gender" value="남자" onChange={memberChange} />남자</label>
                     <label><input type="radio" name="gender" value="여자" onChange={memberChange} />여자</label>
                 </div>
                 {errors.gender && <p className={style.error}>{errors.gender}</p>}
-                <label>취미</label>
-                <div className={style.hobby}>
-                    <label><input type="checkbox" name="hobby" value="독서" onChange={memberChange} />독서</label>
-                    <label><input type="checkbox" name="hobby" value="운동" onChange={memberChange} />운동</label>
-                    <label><input type="checkbox" name="hobby" value="음악" onChange={memberChange} />음악</label>
+                <label>피부타입</label>
+                <div className={style.skintype}>
+                    <label><input type="checkbox" name="skintype" value="지성" onChange={memberChange} />지성</label>
+                    <label><input type="checkbox" name="skintype" value="건성" onChange={memberChange} />건성</label>
+                    <label><input type="checkbox" name="skintype" value="복합성" onChange={memberChange} />복합성</label>
+                    <label><input type="checkbox" name="skintype" value="민감성" onChange={memberChange} />민감성</label>
                 </div>
-                {errors.hobby && <p className={style.error}>{errors.hobby}</p>}
+                {errors.skintype && <p className={style.error}>{errors.skintype}</p>}
                 <label>생년월일</label>
                 <input type="date" name="birth" id="birth" onChange={memberChange} />
                 {errors.birth && <p className={style.error}>{errors.birth}</p>}
-                <label>국가</label>
+                {/* <label>국가</label>
                 <select name="country" id="country" onChange={memberChange}>
                     <option value="">국가 선택</option>
                     <option value="한국">한국</option>
@@ -158,7 +160,7 @@ const Signup: React.FC = () => {
                     <option value="미국">미국</option>
                     <option value="영국">영국</option>
                 </select>
-                {errors.country && <p className={style.error}>{errors.country}</p>}
+                {errors.country && <p className={style.error}>{errors.country}</p>} */}
                 <button type='submit' className={style.submitButton}>가입하기</button>
             </form>
         </div>
