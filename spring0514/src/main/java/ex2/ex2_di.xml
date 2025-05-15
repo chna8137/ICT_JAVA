@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- 의존관계가 해당되는 객체를 빈으로 등록 -->
+<!-- 기본 생성자가 없어서 오류남 -->
+<bean id="ex2di" class="ex2.MySource">
+	<!-- 이 value가 생성자의 매개변수 source를 의미함 -->
+	<constructor-arg value="hi"></constructor-arg>
+</bean>
+
+<!-- DI 관계 ref속성으로 사용할 객체를 연결한다. -->
+<bean id="makeSource" class="ex2.MakeSource">
+	<property name="source" ref="ex2di"/>
+</bean>
+
+</beans>

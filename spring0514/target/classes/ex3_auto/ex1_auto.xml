@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- @AutoWired : 자동으로 빈을 묶어준다., DI를 자동으로 해준다. ***** -->
+	<!-- @AutoWired 사용하기 위해서 context:annotation-config를 설정해야 한다. -->
+	<!-- qualifier : byType일 경우 : 타입이 같은 빈이 여러 개 존재할 경우 수식어로 지정할 수 있다. -->
+	<context:annotation-config></context:annotation-config>
+	<bean id="msg11" class="java.lang.String">
+		<qualifier value="ictMsg1" />
+		<constructor-arg value="자동 빈 묶기 1 - byType1 실습"></constructor-arg>
+	</bean>
+	<bean id="msg22" class="java.lang.String">
+		<qualifier value="ictMsg2" />
+		<constructor-arg value="자동 빈 묶기 - byType2 qualifier 실습"></constructor-arg>
+	</bean>
+	<bean id="auto1" class="ex3_auto.Ex1_AutoWired">
+		<!-- <property name="msg" ref="msg1"></property> -->
+	</bean>
+</beans>
