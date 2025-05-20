@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 여기서 namespace는 @Mapper를 지정한 Interface인 즉 패키지 포함해서 MemoDao를 작성해야 함 -->
+<mapper namespace="kr.co.ictedu.myictstudy.dao.MemoDao">
+
+	<!-- 반드시 @Mapper에서 등록한 인터페이스의 추상메서드의 이름과 역할이 동일해야 함 -->
+	<insert id="add" parameterType="memovo">
+		INSERT INTO memo VALUES(memo_seq.NEXTVAL, #{writer}, #{conts}, #{mreip}, SYSDATE)
+	</insert>
+	
+	<select id="list" resultType="memovo">
+		SELECT num, writer, conts, mreip, mdate FROM memo ORDER BY 1 DESC
+	</select>
+	
+	<select id="detail" resultType="memovo" parameterType="int">
+		SELECT num, writer, conts, mreip, mdate FROM memo WHERE num = #{num}
+	</select>
+	
+	<update id="update" parameterType="memovo">
+		UPDATE memo SET writer=#{writer}, conts=#{conts} WHERE num = #{num}
+	</update>
+	
+	<delete id="del" parameterType="int">
+		delete from memo where num = #{num}
+	</delete>
+
+</mapper>
