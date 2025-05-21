@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.ictedu.myictstudy0521.dao.UpBoardDao">
+
+	<insert id="add" parameterType="upvo">
+		INSERT INTO upboard VALUES(upboard_seq.nextval, #{title}, #{writer},
+		#{content}, #{imgn}, 0, #{reip}, sysdate)
+	</insert>
+
+	<!--<select id="list" resultType="upvo">-->
+	<!--	SELECT num, title, writer, content, imgn, hit, reip, bdate FROM upboard
+	ORDER BY 1 desc-->
+	<!--</select>-->
+
+	<select id="list" resultType="upvo" parameterType="map">
+		SELECT num, title, writer, CONTENT, hit, reip, bdate, imgn, row_num FROM
+		(SELECT num, title, writer, CONTENT, hit, reip, bdate, imgn,
+		ROW_NUMBER() OVER(ORDER BY num DESC) AS row_num FROM upboard
+		) numberd_rows WHERE row_num BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="totalCount" resultType="int">
+		select count(*) cnt from upboard
+	</select>
+
+	<update id="hit" parameterType="int">
+		UPDATE upboard SET hit = hit + 1 WHERE num = #{num}
+	</update>
+
+	<select id="detail" resultType="upvo" parameterType="int">
+		SELECT num, title, writer, content, imgn, hit, reip, bdate FROM upboard
+		WHERE num = #{num}
+	</select>
+
+	<delete id="del" parameterType="int">
+		DELETE FROM upboard WHERE num = #{num}
+	</delete>
+
+</mapper>
