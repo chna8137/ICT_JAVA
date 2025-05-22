@@ -12,14 +12,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpServletRequest;
+import kr.co.ictedu.myictstudy0521.service.UpBoardCommService;
 import kr.co.ictedu.myictstudy0521.service.UpBoardService;
 import kr.co.ictedu.myictstudy0521.vo.PageVO;
+import kr.co.ictedu.myictstudy0521.vo.UpBoardCommVO;
 import kr.co.ictedu.myictstudy0521.vo.UpBoardVO;
 
 @RestController
@@ -28,6 +31,9 @@ public class UpBoardController {
 	
 	@Autowired
 	private UpBoardService upBoardService;
+	
+	@Autowired
+	private UpBoardCommService upBoardCommService;
 	
 	@Autowired
 	private PageVO pageVO;
@@ -83,6 +89,17 @@ public class UpBoardController {
 		return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("업로드 실패");
 	}
 	
+	@GetMapping("/upListDemo")
+	// List -> JsonArray -> [] -> javascript Array
+	// <UpBoardVO> -> JsonObject -> {"property" value, "property" value} -> javascript Object 리터럴
+	public List<UpBoardVO> upBoardDefalutList() {
+		
+		System.out.println("클라이언트로부터 요청이 옴");
+		
+		return upBoardService.listdemo();
+		
+	}
+	
 	@RequestMapping("/upList")
 	// List<UpBoardVO> 를 사용하지 않고 Map<String, Object> 를 사용하는 이유
 	// 데이터 뿐만이 아니라 페이지 처리를 위한 부가 정보도 함께 보낼 때 편해서 사용
@@ -90,7 +107,7 @@ public class UpBoardController {
 		
 		System.out.println("Method => " + request.getMethod());
 		// Map의 키값이 파라미터
-		// 현재 페이지 값
+		// 현재 페이지 주소값
 		String cPage = paramMap.get("cPage");
 		System.out.println("cPage : " + cPage);
 		System.out.println("****************************");
@@ -173,6 +190,30 @@ public class UpBoardController {
 		response.put("endPage", endPage); // 시작
 		return response;
 		
+	}
+	
+	@GetMapping("/updetail")
+	public UpBoardVO detail(@RequestParam("num") int num ) {
+		return upBoardService.detail(num);
+	}
+	// ResponseEntity<?>는 Spring에서 HTTP 응답을 커스터마이징할 수 있게 해주는 클래스
+	// <?>는 "어떤 타입이든 올 수 있다
+	@PostMapping("/upcommAdd")
+	public ResponseEntity<?> upBoardComm(@RequestBody UpBoardCommVO vo) {
+		System.out.println("vo : " + vo.getUcode());
+		System.out.println("vo : " + vo.getUwriter());
+		System.out.println("vo : " + vo.getUcontent());
+		System.out.println("vo : " + vo.getReip());
+		
+		upBoardCommService.addComment(vo);
+		
+		return ResponseEntity.ok().body(1);
+	}
+	
+	@GetMapping("/upcommList")
+	public List<UpBoardCommVO> listBoardComm(@RequestParam("num") int num) {
+		
+		return upBoardCommService.listComment(num);
 	}
 
 }

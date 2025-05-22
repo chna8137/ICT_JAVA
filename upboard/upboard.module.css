@@ -1,0 +1,47 @@
+.container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.boardTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.boardTable th,
+.boardTable td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.boardTable thead {
+    background-color: #FFE3EE;
+}
+
+.titleLink {
+    text-decoration: none;
+    color: black;
+}
+
+.titleLink:hover {
+    text-decoration: underline;
+    color: #82B3ED;
+}
+
+.button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #FFA887;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+    border: none;
+    margin-right: 10px;
+}
+
+.button:hover {
+    background-color: #FF9364;
+}

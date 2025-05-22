@@ -15,7 +15,7 @@ public class PageVO {
 	private int nowBlock; // 현재 블럭 -> [][][][][] -> 1 block
 	private int totalRecord; // 총 게시물 수 .Dao로 부터 받음
 	private int numPerPage; // 한 페이지당 보여질 게시물 수
-	private int pagePerBlock; // 한 블럭 당 보여질 페이지 블럭 수
+	private int pagePerBlock; // 한 블럭 당 보여질 페이지 번호
 	private int totalPage; // 전체 페이수 => totalRecord/numPerPage
 	private int totalBlock; // 전체 블럭 수
 	private int beginPerPage; // 각 페이지 별 시작 게시물의 index값

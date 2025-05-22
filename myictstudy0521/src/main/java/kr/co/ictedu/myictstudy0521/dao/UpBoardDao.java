@@ -17,6 +17,8 @@ public interface UpBoardDao {
 	
 	List<UpBoardVO> list(Map<String, String> map); // 리스트
 	
+	List<UpBoardVO> listdemo();
+	
 	void hit(int num); // 조회수
 	
 	UpBoardVO detail(int num); // 상세보기

@@ -22,6 +22,10 @@ public class UpBoardService {
 	public List<UpBoardVO> list(Map<String, String> map) {
 		return upBoardDao.list(map);
 	}
+	
+	public List<UpBoardVO> listdemo() {
+		return upBoardDao.listdemo();
+	}
 
 	public void hit(int num) {
 		upBoardDao.hit(num);

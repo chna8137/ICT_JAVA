@@ -8,10 +8,10 @@
 		#{content}, #{imgn}, 0, #{reip}, sysdate)
 	</insert>
 
-	<!--<select id="list" resultType="upvo">-->
-	<!--	SELECT num, title, writer, content, imgn, hit, reip, bdate FROM upboard
-	ORDER BY 1 desc-->
-	<!--</select>-->
+	<select id="listdemo" resultType="upvo">
+		SELECT num, title, writer, content, imgn, hit, reip, bdate FROM upboard
+	ORDER BY 1 desc
+	</select>
 
 	<select id="list" resultType="upvo" parameterType="map">
 		SELECT num, title, writer, CONTENT, hit, reip, bdate, imgn, row_num FROM
