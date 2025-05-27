@@ -1,121 +1,43 @@
 package kr.co.ictedu.myictstudy0521.controller.upboard;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpServletRequest;
-import kr.co.ictedu.myictstudy0521.service.UpBoardCommService;
-import kr.co.ictedu.myictstudy0521.service.UpBoardService;
+import kr.co.ictedu.myictstudy0521.service.MemoService;
+
+import kr.co.ictedu.myictstudy0521.vo.MemoVO;
 import kr.co.ictedu.myictstudy0521.vo.PageVO;
-import kr.co.ictedu.myictstudy0521.vo.UpBoardCommVO;
-import kr.co.ictedu.myictstudy0521.vo.UpBoardVO;
+
 
 @RestController
-@RequestMapping("/upboard")
-public class UpBoardController {
-	
-	@Autowired
-	private UpBoardService upBoardService;
-	
-	@Autowired
-	private UpBoardCommService upBoardCommService;
-	
+@RequestMapping("/memo")
+public class MemoController {
 	@Autowired
 	private PageVO pageVO;
+	@Autowired
+	private MemoService memoService;
 	
-	// @Value : application.propertires의 key값으로 설정값을 가져와서 변수에 저장한다.
-	// 파일의 위치의 키값 불러오기
-	@Value("${spring.servlet.multipart.location}")
-	private String filePath;
-	
-	@GetMapping("/getPath")
-	public String getPathTest() {
-		System.out.println("path : " + filePath);
-		return filePath;
-	}
-	
-	// <form method="post" action="upboardAdd" enctype="multipart/form-data">
-	//<input type="file" name=mfile"></form>
-	// 파일 업로드는 Post 방식 ***
-	@PostMapping("/upboardAdd")
-	public ResponseEntity<?> upboardAdd(UpBoardVO vo, HttpServletRequest request) {
-		
-		// VO에 클라이언트 아이피 저장
-		vo.setReip(request.getRemoteAddr());
-		System.out.println("writer : " + vo.getWriter());
-		System.out.println("title : " + vo.getTitle());
-		System.out.println("content : " + vo.getContent());
-		System.out.println("mfile : " + vo.getMfile().getOriginalFilename());
-		System.out.println("=====================");
-		// temp에 저장이 된 상태
-		MultipartFile mf = vo.getMfile();
-		String oriFn = mf.getOriginalFilename();
-		
-		StringBuilder path = new StringBuilder();
-		path.append(filePath).append("\\");
-		path.append(oriFn);
-		System.out.println("FullPath : " + path);
-		
-		File f = new File(path.toString());
-		// f에 저장돈 파일객체를 사용해서 파일의 내용을 읽어와서 한 바이트씩 f에서 잡은 경로로 작성
-		// 개념 : InputStream read()-> while -> BufferedOutputStream write(f)
-		// transferTo() : MultipartFile 를 사용해서 파일을 복제한다.
-		try {
-			mf.transferTo(f);
-			// 업로드 된 파일의 이름을 vo에 저장한다.
-			vo.setImgn(oriFn);
-			// Mapper로 vo 주소 값을 보낸다.
-			upBoardService.add(vo);
-			return ResponseEntity.ok().body("업로드 성공!");
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
-		}
-		// 실패 했을 경구 응답 처리
-		return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("업로드 실패");
-	}
-	
-	@GetMapping("/upListDemo")
-	// List -> JsonArray -> [] -> javascript Array
-	// <UpBoardVO> -> JsonObject -> {"property" value, "property" value} -> javascript Object 리터럴
-	public List<UpBoardVO> upBoardDefalutList() {
-		
-		System.out.println("클라이언트로부터 요청이 옴");
-		
-		return upBoardService.listdemo();
-		
-	}
-	
-	@RequestMapping("/upList")
+	@RequestMapping("/memoList")
 	// List<UpBoardVO> 를 사용하지 않고 Map<String, Object> 를 사용하는 이유
 	// 데이터 뿐만이 아니라 페이지 처리를 위한 부가 정보도 함께 보낼 때 편해서 사용
-	public Map<String, Object> upBoardList(@RequestParam Map<String, String> paramMap, HttpServletRequest request) {
+	public Map<String, Object> memoList(@RequestParam Map<String, String> paramMap, HttpServletRequest request) {
 		
 		System.out.println("Method => " + request.getMethod());
 		// Map의 키값이 파라미터
 		// 현재 페이지 주소값
 		String cPage = paramMap.get("cPage");
 		System.out.println("cPage : " + cPage);
-		System.out.println("searchType: " + paramMap.get("searchType"));
-		System.out.println("searchValue: " + paramMap.get("searchValue"));
 		System.out.println("****************************");
 		
 		// 1. 총 게시물의 수
-		int totalCnt = upBoardService.totalCount(paramMap);
+		int totalCnt = memoService.totalCount();
 		pageVO.setTotalRecord(totalCnt);
 		System.out.println("totalCnt => " + pageVO.getTotalRecord());
 		System.out.println("****************************");
@@ -170,7 +92,7 @@ public class UpBoardController {
 		map.put("end", String.valueOf(pageVO.getEndPerPage()));
 		
 		// 페이징 처리 결과 데이터가 저장되어 반환
-		List<UpBoardVO> list = upBoardService.list(map);
+		List<MemoVO> list = memoService.list(map);
 		System.out.println("List Size => " + list.size());
 		
 		// 7. 페이지 블록을 구현
@@ -193,29 +115,4 @@ public class UpBoardController {
 		return response;
 		
 	}
-	
-	@GetMapping("/updetail")
-	public UpBoardVO detail(@RequestParam("num") int num ) {
-		return upBoardService.detail(num);
-	}
-	// ResponseEntity<?>는 Spring에서 HTTP 응답을 커스터마이징할 수 있게 해주는 클래스
-	// <?>는 "어떤 타입이든 올 수 있다
-	@PostMapping("/upcommAdd")
-	public ResponseEntity<?> upBoardComm(@RequestBody UpBoardCommVO vo) {
-		System.out.println("vo : " + vo.getUcode());
-		System.out.println("vo : " + vo.getUwriter());
-		System.out.println("vo : " + vo.getUcontent());
-		System.out.println("vo : " + vo.getReip());
-		
-		upBoardCommService.addComment(vo);
-		
-		return ResponseEntity.ok().body("성공");
-	}
-	
-	@GetMapping("/upcommList")
-	public List<UpBoardCommVO> listBoardComm(@RequestParam("num") int num) {
-		
-		return upBoardCommService.listComment(num);
-	}
-
 }

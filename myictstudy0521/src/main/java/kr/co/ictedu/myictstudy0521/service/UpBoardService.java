@@ -39,7 +39,7 @@ public class UpBoardService {
 		upBoardDao.del(num);
 	}
 	
-	public int totalCount() {
-		return upBoardDao.totalCount();
+	public int totalCount(Map<String, String> map) {
+		return upBoardDao.totalCount(map);
 	}
 }

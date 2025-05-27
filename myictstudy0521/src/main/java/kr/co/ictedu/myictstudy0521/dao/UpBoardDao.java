@@ -26,6 +26,6 @@ public interface UpBoardDao {
 	void del(int num); // 삭제
 	
 	// 추가하기 - 전체 데이터의 값
-	int totalCount();
+	int totalCount(Map<String, String> map);
 
 }
