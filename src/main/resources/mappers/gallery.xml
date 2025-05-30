@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.ictedu.myictstudy0521.dao.GalleryDao">
+	<insert id="add" parameterType="gvo">
+		insert into gallery (num, title, contents, writer, reip, hit, gdate)
+		values (gallery_seq.NEXTVAL, #{title}, #{contents}, #{writer}, #{reip}, 0, SYSDATE)
+	</insert>
+	
+	<insert id="addImg" parameterType="java.util.List">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT gallery_seq.currVal FROM dual
+		</selectKey>
+		<foreach collection="list" item="image" separator=" " open="insert all" close="select * from dual">
+			INTO galleryimages (galleryid, imagename) VALUES (#{id}, #{image.imagename})
+		</foreach>
+	</insert>
+</mapper>
